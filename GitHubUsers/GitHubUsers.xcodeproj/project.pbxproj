@@ -16,6 +16,11 @@
 		DAF923852DB1336400949700 /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923842DB1336400949700 /* UserDetail.swift */; };
 		DAF923B82DB14D2600949700 /* UserItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923B72DB14D1E00949700 /* UserItemView.swift */; };
 		DAF923BB2DB1546300949700 /* ExtentionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923BA2DB1545A00949700 /* ExtentionString.swift */; };
+		DAF923D22DB1AAB200949700 /* UserItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923D12DB1AA9C00949700 /* UserItemModel.swift */; };
+		DAF923D52DB23F5300949700 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923D42DB23F5300949700 /* CustomNavBarView.swift */; };
+		DAF923D72DB246CD00949700 /* CustomNavBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923D62DB246CD00949700 /* CustomNavBarContainerView.swift */; };
+		DAF923D92DB24E1D00949700 /* CustomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923D82DB24E1D00949700 /* CustomNavigationView.swift */; };
+		DAF923DB2DB266A200949700 /* CustomNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923DA2DB266A200949700 /* CustomNavigationLink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,11 @@
 		DAF923842DB1336400949700 /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
 		DAF923B72DB14D1E00949700 /* UserItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItemView.swift; sourceTree = "<group>"; };
 		DAF923BA2DB1545A00949700 /* ExtentionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionString.swift; sourceTree = "<group>"; };
+		DAF923D12DB1AA9C00949700 /* UserItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItemModel.swift; sourceTree = "<group>"; };
+		DAF923D42DB23F5300949700 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
+		DAF923D62DB246CD00949700 /* CustomNavBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarContainerView.swift; sourceTree = "<group>"; };
+		DAF923D82DB24E1D00949700 /* CustomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationView.swift; sourceTree = "<group>"; };
+		DAF923DA2DB266A200949700 /* CustomNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationLink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -59,6 +69,11 @@
 		DAF923502DB114F100949700 /* GitHubUsersUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GitHubUsersUITests;
+			sourceTree = "<group>";
+		};
+		DAF923DD2DB26F7800949700 /* DetailView */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -122,7 +137,8 @@
 				DAF923732DB12D3800949700 /* Models */,
 				DAF923702DB12D3800949700 /* Services */,
 				DAF923712DB12D3800949700 /* ViewModels */,
-				DAF923722DB12D3800949700 /* Views */,
+				DAF923722DB12D3800949700 /* Scene */,
+				DAF923D32DB23F3E00949700 /* CustomViews */,
 				DAF923B92DB1544B00949700 /* Extention */,
 				DAF923612DB1203D00949700 /* Preview Content */,
 				DAF923622DB1203D00949700 /* Assets.xcassets */,
@@ -146,18 +162,20 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		DAF923722DB12D3800949700 /* Views */ = {
+		DAF923722DB12D3800949700 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				DAF923B72DB14D1E00949700 /* UserItemView.swift */,
-				DAF923632DB1203D00949700 /* UserListView.swift */,
+				DAF923DC2DB26F5C00949700 /* ListView */,
+				DAF923DD2DB26F7800949700 /* DetailView */,
+				DAF923CE2DB1A00D00949700 /* ItemView */,
 			);
-			path = Views;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		DAF923732DB12D3800949700 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DAF923D12DB1AA9C00949700 /* UserItemModel.swift */,
 				DAF923822DB1323D00949700 /* User.swift */,
 				DAF923842DB1336400949700 /* UserDetail.swift */,
 			);
@@ -170,6 +188,33 @@
 				DAF923BA2DB1545A00949700 /* ExtentionString.swift */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		DAF923CE2DB1A00D00949700 /* ItemView */ = {
+			isa = PBXGroup;
+			children = (
+				DAF923B72DB14D1E00949700 /* UserItemView.swift */,
+			);
+			path = ItemView;
+			sourceTree = "<group>";
+		};
+		DAF923D32DB23F3E00949700 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				DAF923D42DB23F5300949700 /* CustomNavBarView.swift */,
+				DAF923D62DB246CD00949700 /* CustomNavBarContainerView.swift */,
+				DAF923D82DB24E1D00949700 /* CustomNavigationView.swift */,
+				DAF923DA2DB266A200949700 /* CustomNavigationLink.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		DAF923DC2DB26F5C00949700 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				DAF923632DB1203D00949700 /* UserListView.swift */,
+			);
+			path = ListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +231,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				DAF923DD2DB26F7800949700 /* DetailView */,
 			);
 			name = GitHubUsers;
 			packageProductDependencies = (
@@ -317,11 +365,16 @@
 			files = (
 				DAF923832DB1323D00949700 /* User.swift in Sources */,
 				DAF923672DB1203D00949700 /* UserListView.swift in Sources */,
+				DAF923D92DB24E1D00949700 /* CustomNavigationView.swift in Sources */,
 				DAF923B82DB14D2600949700 /* UserItemView.swift in Sources */,
 				DAF923682DB1203D00949700 /* GitHubUsersApp.swift in Sources */,
 				DAF923852DB1336400949700 /* UserDetail.swift in Sources */,
+				DAF923D22DB1AAB200949700 /* UserItemModel.swift in Sources */,
 				DAF923BB2DB1546300949700 /* ExtentionString.swift in Sources */,
+				DAF923DB2DB266A200949700 /* CustomNavigationLink.swift in Sources */,
+				DAF923D72DB246CD00949700 /* CustomNavBarContainerView.swift in Sources */,
 				DAF923692DB1203D00949700 /* Item.swift in Sources */,
+				DAF923D52DB23F5300949700 /* CustomNavBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
