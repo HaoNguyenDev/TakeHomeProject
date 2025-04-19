@@ -6,13 +6,12 @@
 //
 
 import Foundation
-struct User: Codable, Identifiable {
+struct User: Codable, Identifiable, Equatable {
     let id: Int?
     let login : String?
     let avatarUrl : String?
     let url : String?
    
-    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case login = "login"
@@ -26,6 +25,10 @@ struct User: Codable, Identifiable {
         login = try values.decodeIfPresent(String.self, forKey: .login)
         avatarUrl = try values.decodeIfPresent(String.self, forKey: .avatarUrl)
         url = try values.decodeIfPresent(String.self, forKey: .url)
+    }
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        lhs.id == rhs.id
     }
 }
 

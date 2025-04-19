@@ -12,6 +12,7 @@ struct CustomNavBarView: View {
     @State var title: String?
     @State var subtitle: String?
     @State var hideBackButton = false
+    @State var backgroundColor: Color = .white
     var body: some View {
         HStack {
             backButton
@@ -22,6 +23,7 @@ struct CustomNavBarView: View {
             .hidden()
         }
         .frame(maxWidth: .infinity)
+        .background(backgroundColor)
         .padding()
     }
 }
