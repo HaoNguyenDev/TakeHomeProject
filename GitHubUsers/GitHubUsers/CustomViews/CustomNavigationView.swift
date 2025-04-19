@@ -27,7 +27,7 @@ struct CustomNavigationView<Content: View>: View {
         NavigationView {
             CustomNavBarContainerView(title: title, subtitle: subtitle, hideBackButton: hideBackButton) {
                 content
-            }
+    }
             .navigationBarHidden(true)
         }
     }

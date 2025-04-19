@@ -35,12 +35,10 @@ extension UserItemView {
             returnImage
                 .resizable()
                 .scaledToFit()
-                .frame(width: 100, height: 100)
         }, placeholder: {
             Image("man-user-circle-icon")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 80, height: 80)
         })
         .frame(maxWidth: 100, maxHeight: 100)
         .background(Color.gray.opacity(0.1))

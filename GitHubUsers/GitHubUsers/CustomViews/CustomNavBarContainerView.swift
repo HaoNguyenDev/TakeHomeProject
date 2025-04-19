@@ -12,6 +12,7 @@ struct CustomNavBarContainerView<Content: View>: View {
     let subtitle: String?
     var hideBackButton: Bool = false
     let content: Content
+    var backgroundColor: Color = .white
     
     init(title: String? = "",
          subtitle: String? = "",
@@ -26,10 +27,12 @@ struct CustomNavBarContainerView<Content: View>: View {
     var body: some View {
         VStack(spacing: 0) {
             CustomNavBarView(title: title,
-                             subtitle: subtitle,
+                             subtitle: nil,
                              hideBackButton: hideBackButton)
+            .background(backgroundColor)
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
         }
     }
 }
