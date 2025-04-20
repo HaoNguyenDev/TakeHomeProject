@@ -151,13 +151,6 @@
 			path = LoadImageService;
 			sourceTree = "<group>";
 		};
-		DA7FDBE42DB4EE350025C00E /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		DAF923282DB114F000949700 = {
 			isa = PBXGroup;
 			children = (
@@ -189,7 +182,6 @@
 		DAF923662DB1203D00949700 /* GitHubUsers */ = {
 			isa = PBXGroup;
 			children = (
-				DA7FDBE42DB4EE350025C00E /* Helper */,
 				DA7FDBCF2DB3A27B0025C00E /* CacheManager */,
 				DAF923732DB12D3800949700 /* Models */,
 				DAF923702DB12D3800949700 /* NetworkServices */,

@@ -43,69 +43,80 @@ class UserListViewModel: ObservableObject, @preconcurrency UserListViewModelProt
     }
 }
 
+// MARK: - Public Methods
 extension UserListViewModel {
-    // MARK: - Fetch new user
     func fetchUsers() async {
-        guard !isLoading else { return }
-        isLoading = true
-        error = nil
-        defer { isLoading = false }
-        do {
-            let cachedUsers = try cacheService.fetchDataFromCache()
+        await performWithLoading {
+            let cachedUsers = try fetchCachedUsers()
             if !cachedUsers.isEmpty {
-                users = cachedUsers
-                updatePagination(from: users)
-                isLoading = false
+                updateUsers(cachedUsers)
+                updatePagination(from: cachedUsers)
                 return
             }
-        
-            /* get new data from api */
-            let newUsers = try await self.networkService.fetchUsers(perPage: paginationConfig.perPage,
-                                                                    since: paginationConfig.since)
-            /* just delete expired data until we have new data */
+            
+            let newUsers = try await fetchUsersFromAPI()
             if !newUsers.isEmpty {
-                /* delete the expired data */
                 try cacheService.clearExpiredDataFromCache()
+                updateUsers(newUsers)
                 updatePagination(from: newUsers)
-                users = newUsers
-                /* cache all users again to make sure we have full user list after relaunch */
-                try await cacheService.saveDataToCache(items: users)
+                try await saveUsersToCache(newUsers)
             }
-            isLoading = false
-        } catch {
-            self.error = error
-            isLoading = false
-            #if DEBUG
-            print("Failed to fetch users: \(error.localizedDescription)")
-            #endif
         }
     }
     
-    // MARK: - LoadMore
     func loadMoreUser() async {
-        guard !isLoading else { return }
-        isLoading = true
-        error = nil
-        defer { isLoading = false }
-        do {
-            /* get new data from api */
-            let newUsers = try await self.networkService.fetchUsers(perPage: paginationConfig.perPage,
-                                                                    since: paginationConfig.since)
-             /* cache users and images */
-            try await cacheService.saveDataToCache(items: newUsers)
+        await performWithLoading {
+            let newUsers = try await fetchUsersFromAPI()
+            try await saveUsersToCache(newUsers)
+            appendUsers(newUsers)
             updatePagination(from: newUsers)
-            self.users.append(contentsOf: newUsers)
-            isLoading = false
-        } catch {
-            self.error = error
-            isLoading = false
         }
     }
     
-    /* update since parameter with last user id */
     func updatePagination(from users: [User]) {
         if let lastUserId = users.last?.id {
             paginationConfig.since = lastUserId
         }
+    }
+}
+
+// MARK: - Private Helper Methods
+private extension UserListViewModel {
+    private func performWithLoading(_ operation: () async throws -> Void) async {
+        guard !isLoading else { return }
+        isLoading = true
+        error = nil
+        defer { isLoading = false }
+        do {
+            try await operation()
+        } catch {
+            self.error = error
+            #if DEBUG
+            print("Operation failed: \(error.localizedDescription)")
+            #endif
+        }
+    }
+    
+    private func fetchCachedUsers() throws -> [User] {
+        return try cacheService.fetchDataFromCache()
+    }
+    
+    private func fetchUsersFromAPI() async throws -> [User] {
+        return try await networkService.fetchUsers(
+            perPage: paginationConfig.perPage,
+            since: paginationConfig.since
+        )
+    }
+    
+    private func saveUsersToCache(_ users: [User]) async throws {
+        try await cacheService.saveDataToCache(items: users)
+    }
+    
+    private func updateUsers(_ newUsers: [User]) {
+        self.users = newUsers
+    }
+    
+    private func appendUsers(_ newUsers: [User]) {
+        self.users.append(contentsOf: newUsers)
     }
 }
