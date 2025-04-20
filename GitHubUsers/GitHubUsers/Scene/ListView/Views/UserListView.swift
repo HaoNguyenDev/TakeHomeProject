@@ -6,16 +6,23 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct UserListView: View {
-    
-    @StateObject private var viewModel = UserListViewModel()
+    @StateObject private var viewModel: UserListViewModel
     @State private var showErrorAlert: Bool = false
     
+    init(viewModel: UserListViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
-        CustomNavigationView (title: "GitHub Users", subtitle: nil, hideBackButton: true, content: {
-            scrollView
-        })
+        ZStack {
+            CustomNavigationView (title: "GitHub Users", subtitle: nil, hideBackButton: true, content: { scrollView })
+            if viewModel.isLoading {
+                loadingView
+            }
+        }
         .task {
             await viewModel.fetchUsers()
         }
@@ -24,20 +31,7 @@ struct UserListView: View {
                 self.showErrorAlert.toggle()
             }
         })
-        .alert(isPresented: $showErrorAlert) {
-            Alert(title: Text("Error"), message: Text((viewModel.error as? NetworkError)?.errorDescription ?? ""), dismissButton: .default(Text("OK")))
-        }
-    }
-    
-    private func userItemView(user: User) -> UserItemView {
-        let user = UserItemModel(userName: user.login,
-                                 avatarUrl: user.avatarUrl,
-                                 githubUrl: user.url,
-                                 locationName: "",
-                                 followersCount: "",
-                                 followingCount: "",
-                                 blogUrl: "")
-        return UserItemView(user: user, isDetailView: .constant(false))
+        .modifier(AlertHandler(showAlert: $showErrorAlert, error: viewModel.error, onDismiss: {}))
     }
 }
 
@@ -46,8 +40,7 @@ extension UserListView {
         ScrollView {
             LazyVStack(spacing: 12) {
                 ForEach(viewModel.users, id: \.id) { user in
-                    CustomNavigationLink(title: "User Details",
-                                         destination: UserDetailsView(userName: user.login)) {
+                    CustomNavigationLink(title: "User Details", destination: UserDetailsView(userName: user.login)) {
                         userItemView(user: user)
                     }
                     .onAppear {
@@ -57,19 +50,55 @@ extension UserListView {
             }
             .padding(.top, 10)
         }
-
     }
     
     func loadMoreDataIfNeed(currentUser: User) {
         if (currentUser == viewModel.users.last && viewModel.isLoading == false && !viewModel.users.isEmpty) {
-            print(">>> Load more data...")
+            
+            #if DEBUG
+            print(">>> Load more data from user withID\(String(describing: currentUser.id))")
+            #endif
+            /* load more if scroll to the last user */
             Task {
-                await viewModel.fetchUsers()
+                await viewModel.loadMoreUser()
             }
         }
     }
 }
 
+// MARK: - CustomView
+extension UserListView {
+    private func userItemView(user: User) -> UserItemView {
+        let user = UserItemModel(id: user.id,
+                                 userName: user.login,
+                                 avatarUrl: user.avatarUrl,
+                                 githubUrl: user.url,
+                                 locationName: "",
+                                 followersCount: "",
+                                 followingCount: "",
+                                 blogUrl: "",
+                                 cachedImage: user.cachedImage)
+        return UserItemView(user: user, isDetailView: .constant(false))
+    }
+    
+    private var loadingView: some View {
+        ProgressView()
+            .progressViewStyle(CircularProgressViewStyle())
+            .scaleEffect(1.5)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black.opacity(0.2))
+            .ignoresSafeArea()
+    }
+}
+
 #Preview {
-    UserListView()
+    let container = try! SwiftDataContainer()
+    let context = container.createContext()
+    
+    let viewModel = UserListViewModel(
+        networkService: GitHubNetworkService(),
+        cacheService: CacheManager<User>(modelType: User.self, context: context)
+    )
+    
+    UserListView(viewModel: viewModel)
 }

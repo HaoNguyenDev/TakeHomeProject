@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - NetworkManager
 class NetworkManager: NetworkService {
     private let session: URLSession
     

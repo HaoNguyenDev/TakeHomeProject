@@ -6,13 +6,22 @@
 //
 import Foundation
 
-class UserDetailViewModel: ObservableObject {
+// MARK: - UserDetailViewModel Protocol
+protocol UserDetailViewModelProtocol {
+    var usersDetail: UserDetail? { get }
+    var isLoading: Bool { get }
+    var error: Error? { get }
+    func fetchUsers(by userName: String) async
+}
+
+// MARK: - UserDetailViewModel
+class UserDetailViewModel: ObservableObject, UserDetailViewModelProtocol {
     @Published var usersDetail: UserDetail?
     @Published var isLoading: Bool = false
     @Published var error: Error?
-    private let networkService: GitHubService?
+    private let networkService: GitHubServiceProtocol?
     
-    init(networkService: GitHubService = GitHubNetworkService()) {
+    init(networkService: GitHubServiceProtocol = GitHubNetworkService()) {
         self.networkService = networkService
     }
 }
@@ -24,18 +33,15 @@ extension UserDetailViewModel {
         isLoading = true
         error = nil
         defer { isLoading = false }
-        Task(priority: .medium) {
-            do {
-                usersDetail = try await networkService?.fetchUserDetail(by: userName)
-                isLoading = false
-            } catch {
-                self.error = error
-                isLoading = false
-                #if DEBUG
-                print("Failed to fetch users: \(error)")
-                #endif
-            }
-            
+        do {
+            usersDetail = try await networkService?.fetchUserDetail(by: userName)
+            isLoading = false
+        } catch {
+            self.error = error
+            isLoading = false
+            #if DEBUG
+            print("Failed to fetch users: \(error)")
+            #endif
         }
     }
 }

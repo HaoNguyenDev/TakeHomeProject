@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - UserDetailModel
 struct UserDetail: Codable {
     let login : String?
     let name: String?
@@ -75,10 +76,10 @@ struct UserDetail: Codable {
     }
 }
 
-//MockData
+// MARK: - MockData
 extension UserDetail {
     static var mockUserDetail: UserDetail = {
-        // Mock JSON data representing an array of users
+        /* Mock JSON data representing an array of users */
         let jsonString = """
         {
           "login": "jvantuyl",
@@ -94,14 +95,16 @@ extension UserDetail {
         }
         """
         
-        // Convert JSON string to Data and decode into [User]
+        /* Convert JSON string to Data and decode into [User] */
         do {
             let jsonData = jsonString.data(using: .utf8)!
             let decoder = JSONDecoder()
             let user = try decoder.decode(UserDetail.self, from: jsonData)
             return user
         } catch {
+            #if DEBUG
             print("Error decoding mock user data: \(error)")
+            #endif
             return UserDetail()
         }
     }()

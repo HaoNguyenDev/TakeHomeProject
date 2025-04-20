@@ -14,50 +14,68 @@ struct UserDetailsView: View {
     var userName: String?
     
     var body: some View {
-        ScrollView {
-            VStack (spacing: 20) {
-                userItemView // The user info part
-                FollowerView(followerCount: viewModel.usersDetail?.getUserFollowers(),
-                             followingCount: viewModel.usersDetail?.getUserFollowing())
-                BlogView(content: viewModel.usersDetail?.blog ?? "Bio not available")
+        ZStack {
+            ScrollView {
+                VStack (spacing: 20) {
+                    userItemView // The user info part
+                    FollowerView(followerCount: viewModel.usersDetail?.getUserFollowers(),
+                                 followingCount: viewModel.usersDetail?.getUserFollowing())
+                    BlogView(content: viewModel.usersDetail?.blog ?? "Bio not available")
+                }
+                .padding(.vertical)
             }
-            .padding(.vertical)
+            if viewModel.isLoading {
+                loadingView
+            }
         }
         .onReceive(viewModel.$error, perform: { error in
             if error != nil {
                 self.showErrorAlert.toggle()
             }
         })
-        .alert(isPresented: $showErrorAlert) {
-            Alert(title: Text("Error"), message: Text((viewModel.error as? NetworkError)?.errorDescription ?? ""), dismissButton: .default(Text("OK")) {
-                presentationMode.wrappedValue.dismiss()
-            })
-        }
+        .modifier(AlertHandler(showAlert: $showErrorAlert, error: viewModel.error, onDismiss: {
+            presentationMode.wrappedValue.dismiss()
+        }))
         .task {
             guard let userName = userName else {
-                //handle empty username
+                //Todo: handle empty username
                 return
             }
             await viewModel.fetchUsers(by: userName)
         }
     }
-    
+}
+
+// MARK: - CustomView
+extension UserDetailsView {
     private var userItemView: some View {
-        let user = UserItemModel(userName: viewModel.usersDetail?.name,
+        let user = UserItemModel(id: viewModel.usersDetail?.id,
+                                 userName: viewModel.usersDetail?.name,
                                  avatarUrl: viewModel.usersDetail?.avatarUrl,
                                  githubUrl: viewModel.usersDetail?.url,
                                  locationName: viewModel.usersDetail?.location,
                                  followersCount: viewModel.usersDetail?.getUserFollowers(),
                                  followingCount: viewModel.usersDetail?.getUserFollowing(),
-                                 blogUrl: viewModel.usersDetail?.blog)
+                                 blogUrl: viewModel.usersDetail?.blog,
+                                 cachedImage: nil)
         return UserItemView(user: user, isDetailView: .constant(true))
+    }
+    
+    private var loadingView: some View {
+        ProgressView()
+            .progressViewStyle(CircularProgressViewStyle())
+            .scaleEffect(1.5)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black.opacity(0.2))
+            .ignoresSafeArea()
     }
 }
 
 #Preview {
-    UserDetailsView(userName: "haonguyen")
+    UserDetailsView(userName: "TEST USERNAME")
 }
 
+// MARK: - CustomView
 struct FollowerView: View {
     var followerCount: String?
     var followingCount: String?
