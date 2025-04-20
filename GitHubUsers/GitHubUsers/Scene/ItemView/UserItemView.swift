@@ -31,15 +31,24 @@ struct UserItemView: View {
 
 extension UserItemView {
     private var avatarView: some View {
-        AsyncImage(url: URL(string: user.avatarUrl.orEmpty), content: { returnImage in
-            returnImage
-                .resizable()
-                .scaledToFit()
-        }, placeholder: {
-            Image("man-user-circle-icon")
-                .resizable()
-                .scaledToFit()
-        })
+        Group {
+            /* load image data from cache first*/
+            if let imageData = user.cachedImage, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                AsyncImage(url: URL(string: user.avatarUrl.orEmpty), content: { returnImage in
+                    returnImage
+                        .resizable()
+                        .scaledToFit()
+                }, placeholder: {
+                    Image("man-user-circle-icon")
+                        .resizable()
+                        .scaledToFit()
+                })
+            }
+        }
         .frame(maxWidth: 100, maxHeight: 100)
         .background(Color.gray.opacity(0.1))
         .cornerRadius(10)
@@ -58,7 +67,7 @@ extension UserItemView {
             Divider()
             
             if isDetailView {
-                Text(user.locationName.orEmpty.uppercased())
+                Text(user.locationName ?? "Location not found".uppercased())
                     .frame(maxWidth: .infinity)
                     .font(.system(size: 12))
             } else {
@@ -81,13 +90,15 @@ extension UserItemView {
 
 #Preview {
     let user = UserDetail.mockUserDetail
-    let itemModel = UserItemModel(userName: user.name,
+    let itemModel = UserItemModel(id: 1,
+                                  userName: user.name,
                                   avatarUrl: user.avatarUrl,
                                   githubUrl: user.url,
                                   locationName: user.location,
                                   followersCount: user.getUserFollowers(),
                                   followingCount: user.getUserFollowing(),
-                                  blogUrl: user.blog)
+                                  blogUrl: user.blog,
+                                  cachedImage: nil)
     
     UserItemView(user: itemModel, isDetailView: .constant(false))
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Define HTTP
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"

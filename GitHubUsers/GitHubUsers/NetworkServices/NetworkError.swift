@@ -5,9 +5,9 @@
 //  Created by Hao Nguyen on 19/4/25.
 //
 
-
 import Foundation
 
+// MARK: - Custom NetworkError
 enum NetworkError: Error {
     case invalidURL
     case invalidData

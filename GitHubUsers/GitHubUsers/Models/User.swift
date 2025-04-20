@@ -6,12 +6,22 @@
 //
 
 import Foundation
-struct User: Codable, Identifiable, Equatable {
-    let id: Int?
-    let login : String?
-    let avatarUrl : String?
-    let url : String?
-   
+import SwiftData
+
+// MARK: - UserModel
+@Model
+final class User: Codable, Identifiable, Equatable, Cacheable {
+    var id: Int?
+    var login: String?
+    var avatarUrl: String?
+    var url: String?
+    
+    //Cacheable
+    var cachedAt: Date
+    //ImageCacheable
+    var imageURL: String?
+    var cachedImage: Data? // add this propertie to cache image loaded
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case login = "login"
@@ -25,6 +35,17 @@ struct User: Codable, Identifiable, Equatable {
         login = try values.decodeIfPresent(String.self, forKey: .login)
         avatarUrl = try values.decodeIfPresent(String.self, forKey: .avatarUrl)
         url = try values.decodeIfPresent(String.self, forKey: .url)
+        cachedAt = Date()
+        imageURL = try values.decodeIfPresent(String.self, forKey: .avatarUrl)
+        cachedImage = nil
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(login, forKey: .login)
+        try container.encodeIfPresent(avatarUrl, forKey: .avatarUrl)
+        try container.encodeIfPresent(url, forKey: .url)
     }
     
     static func == (lhs: User, rhs: User) -> Bool {

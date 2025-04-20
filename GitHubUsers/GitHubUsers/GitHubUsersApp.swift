@@ -10,23 +10,24 @@ import SwiftData
 
 @main
 struct GitHubUsersApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
+    let container: SwiftDataContainer
+    
+    init() {
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            self.container = try SwiftDataContainer()
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            fatalError("Failed to initialize SwiftData container: \(error)")
         }
-    }()
-
+    }
+    
     var body: some Scene {
         WindowGroup {
-            UserListView()
+            let context = container.createContext()
+            let viewModel = UserListViewModel(
+                networkService: GitHubNetworkService(),
+                cacheService: CacheManager<User>(modelType: User.self, context: context)
+            )
+            UserListView(viewModel: viewModel)
         }
-        .modelContainer(sharedModelContainer)
     }
 }

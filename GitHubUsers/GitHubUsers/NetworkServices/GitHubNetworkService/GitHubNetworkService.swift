@@ -7,12 +7,14 @@
 
 import Foundation
 
-protocol GitHubService {
+// MARK: - GitHubServiceProtocol
+protocol GitHubServiceProtocol {
     func fetchUsers(perPage: Int, since: Int) async throws -> [User]
     func fetchUserDetail(by username: String) async throws -> UserDetail
 }
 
-class GitHubNetworkService: GitHubService {
+// MARK: - GitHubNetworkService
+class GitHubNetworkService: GitHubServiceProtocol {
     private let networkManager: NetworkService
     
     init(networkManager: NetworkService = NetworkManager()) {

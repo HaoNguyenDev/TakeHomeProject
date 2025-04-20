@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Define GitHubAPIEndpoint
 struct GitHubAPIEndpoint: Endpoint {
     var baseURL: String = "https://api.github.com"
     var path: String
