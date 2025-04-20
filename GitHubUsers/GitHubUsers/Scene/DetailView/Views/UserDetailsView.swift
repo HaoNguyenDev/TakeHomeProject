@@ -118,12 +118,19 @@ struct BlogView: View {
                 .font(.system(size: 20, weight: .medium))
                 .padding(.leading, 20)
             
-            Text(content)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(.gray)
+            if let url = URL(string: content) {
+                Link(content, destination: url)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(.blue)
                 .font(.system(size: 12, weight: .medium))
                 .lineLimit(nil)
                 .padding(.leading, 20)
+            } else {
+                Text("Invalid URL")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.blue)
+                    .font(.system(size: 12))
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

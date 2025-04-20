@@ -102,7 +102,7 @@ extension UserListViewModel {
         }
     }
     
-    /* update since paramer with last user id */
+    /* update since parameter with last user id */
     func updatePagination(from users: [User]) {
         if let lastUserId = users.last?.id {
             paginationConfig.since = lastUserId
