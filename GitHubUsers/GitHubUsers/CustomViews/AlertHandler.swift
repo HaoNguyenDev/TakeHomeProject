@@ -16,7 +16,7 @@ struct AlertHandler: ViewModifier {
         content
             .alert(isPresented: $showAlert) {
                 var errorMessage: String
-                if let networkError = error as? NetworkError {
+                if let networkError = error as? GitHubServiceError {
                     errorMessage = networkError.errorDescription
                 } else {
                     errorMessage = error?.localizedDescription ?? "Unknown error"

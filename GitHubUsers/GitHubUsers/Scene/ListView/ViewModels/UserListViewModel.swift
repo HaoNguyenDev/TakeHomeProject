@@ -51,15 +51,24 @@ extension UserListViewModel {
             if !cachedUsers.isEmpty {
                 updateUsers(cachedUsers)
                 updatePagination(from: cachedUsers)
+                #if DEBUG
+                print("Fetched users from cache")
+                #endif
+                /* clear cache if need */
+                clearExpiredCacheIfNeeded()
                 return
             }
             
+            /* fetch new data if cache is empty */
             let newUsers = try await fetchUsersFromAPI()
             if !newUsers.isEmpty {
-                try cacheService.clearExpiredDataFromCache()
+                /* save new data to cache */
+                try await saveUsersToCache(newUsers)
                 updateUsers(newUsers)
                 updatePagination(from: newUsers)
-                try await saveUsersToCache(newUsers)
+                #if DEBUG
+                print("Fetched users from server")
+                #endif
             }
         }
     }
@@ -91,9 +100,6 @@ private extension UserListViewModel {
             try await operation()
         } catch {
             self.error = error
-            #if DEBUG
-            print("Operation failed: \(error.localizedDescription)")
-            #endif
         }
     }
     
@@ -108,10 +114,6 @@ private extension UserListViewModel {
         )
     }
     
-    private func saveUsersToCache(_ users: [User]) async throws {
-        try await cacheService.saveDataToCache(items: users)
-    }
-    
     private func updateUsers(_ newUsers: [User]) {
         self.users = newUsers
     }
@@ -119,4 +121,27 @@ private extension UserListViewModel {
     private func appendUsers(_ newUsers: [User]) {
         self.users.append(contentsOf: newUsers)
     }
+    
+    private func saveUsersToCache(_ users: [User]) async throws {
+        try await cacheService.saveDataToCache(items: users)
+    }
+    
+    private func clearExpiredCacheIfNeeded() {
+        do {
+            try cacheService.clearExpiredDataFromCache()
+        } catch {
+            #if DEBUG
+            print("Failed to clear expired cache: \(error)")
+            #endif
+        }
+    }
 }
+
+//MARK: - SUPPORT UNIT TEST
+#if DEBUG
+extension UserListViewModel {
+    var testPaginationConfig: PaginationConfig {
+        return paginationConfig
+    }
+}
+#endif

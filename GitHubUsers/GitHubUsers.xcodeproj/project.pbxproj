@@ -7,7 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA7FDBB62DB37DC50025C00E /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FDBB52DB37DC50025C00E /* NetworkError.swift */; };
+		DA765C9E2DB5733E002E43F1 /* UserListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765C9D2DB5733E002E43F1 /* UserListViewModelTests.swift */; };
+		DA765CA02DB5736E002E43F1 /* MockGitHubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765C9F2DB5736E002E43F1 /* MockGitHubService.swift */; };
+		DA765CA22DB57447002E43F1 /* MockCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CA12DB57447002E43F1 /* MockCacheManager.swift */; };
+		DA765CA42DB57575002E43F1 /* MockSwiftDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CA32DB57575002E43F1 /* MockSwiftDataContainer.swift */; };
+		DA765CA72DB57853002E43F1 /* MockUsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CA62DB57853002E43F1 /* MockUsersModel.swift */; };
+		DA765CA92DB578E6002E43F1 /* MockUserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CA82DB578E6002E43F1 /* MockUserDetailModel.swift */; };
+		DA765CAB2DB58DAC002E43F1 /* UserDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CAA2DB58DAC002E43F1 /* UserDetailViewModelTest.swift */; };
+		DA765CAD2DB593DD002E43F1 /* CacheManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CAC2DB593DD002E43F1 /* CacheManagerTests.swift */; };
+		DA765CB02DB59C1F002E43F1 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CAF2DB59C1F002E43F1 /* AppSetting.swift */; };
+		DA765CB22DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CB12DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift */; };
+		DA765CB82DB5D002002E43F1 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CB72DB5D002002E43F1 /* MockNetworkManager.swift */; };
+		DA7FDBB62DB37DC50025C00E /* GitHubServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FDBB52DB37DC50025C00E /* GitHubServiceError.swift */; };
 		DA7FDBB82DB37E320025C00E /* NetworkProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FDBB72DB37E320025C00E /* NetworkProtocols.swift */; };
 		DA7FDBBA2DB37FD20025C00E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FDBB92DB37FD20025C00E /* NetworkManager.swift */; };
 		DA7FDBBC2DB381B70025C00E /* GitHubAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FDBBB2DB381B70025C00E /* GitHubAPIEndpoint.swift */; };
@@ -57,7 +68,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DA7FDBB52DB37DC50025C00E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		DA765C9D2DB5733E002E43F1 /* UserListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModelTests.swift; sourceTree = "<group>"; };
+		DA765C9F2DB5736E002E43F1 /* MockGitHubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGitHubService.swift; sourceTree = "<group>"; };
+		DA765CA12DB57447002E43F1 /* MockCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCacheManager.swift; sourceTree = "<group>"; };
+		DA765CA32DB57575002E43F1 /* MockSwiftDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSwiftDataContainer.swift; sourceTree = "<group>"; };
+		DA765CA62DB57853002E43F1 /* MockUsersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUsersModel.swift; sourceTree = "<group>"; };
+		DA765CA82DB578E6002E43F1 /* MockUserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDetailModel.swift; sourceTree = "<group>"; };
+		DA765CAA2DB58DAC002E43F1 /* UserDetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModelTest.swift; sourceTree = "<group>"; };
+		DA765CAC2DB593DD002E43F1 /* CacheManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerTests.swift; sourceTree = "<group>"; };
+		DA765CAF2DB59C1F002E43F1 /* AppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetting.swift; sourceTree = "<group>"; };
+		DA765CB12DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkServiceTest.swift; sourceTree = "<group>"; };
+		DA765CB72DB5D002002E43F1 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
+		DA765CBD2DB5D7DE002E43F1 /* GitHubUsers.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GitHubUsers.xctestplan; sourceTree = "<group>"; };
+		DA7FDBB52DB37DC50025C00E /* GitHubServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubServiceError.swift; sourceTree = "<group>"; };
 		DA7FDBB72DB37E320025C00E /* NetworkProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocols.swift; sourceTree = "<group>"; };
 		DA7FDBB92DB37FD20025C00E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DA7FDBBB2DB381B70025C00E /* GitHubAPIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIEndpoint.swift; sourceTree = "<group>"; };
@@ -117,6 +140,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA765CA52DB57674002E43F1 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				DA765C9F2DB5736E002E43F1 /* MockGitHubService.swift */,
+				DA765CA12DB57447002E43F1 /* MockCacheManager.swift */,
+				DA765CA32DB57575002E43F1 /* MockSwiftDataContainer.swift */,
+				DA765CA62DB57853002E43F1 /* MockUsersModel.swift */,
+				DA765CA82DB578E6002E43F1 /* MockUserDetailModel.swift */,
+				DA765CB72DB5D002002E43F1 /* MockNetworkManager.swift */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
+		DA765CAE2DB59C02002E43F1 /* AppSetting */ = {
+			isa = PBXGroup;
+			children = (
+				DA765CAF2DB59C1F002E43F1 /* AppSetting.swift */,
+			);
+			path = AppSetting;
+			sourceTree = "<group>";
+		};
 		DA7FDBBF2DB384290025C00E /* GitHubNetworkService */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,8 +172,8 @@
 		DA7FDBCF2DB3A27B0025C00E /* CacheManager */ = {
 			isa = PBXGroup;
 			children = (
-				DA7FDBD02DB3A28A0025C00E /* CacheManager.swift */,
 				DA7FDBD52DB3CC1C0025C00E /* SwiftDataContainer.swift */,
+				DA7FDBD02DB3A28A0025C00E /* CacheManager.swift */,
 				DA7FDBD22DB3C03B0025C00E /* Protocol */,
 			);
 			path = CacheManager;
@@ -154,6 +198,7 @@
 		DAF923282DB114F000949700 = {
 			isa = PBXGroup;
 			children = (
+				DA765CBD2DB5D7DE002E43F1 /* GitHubUsers.xctestplan */,
 				DAF923662DB1203D00949700 /* GitHubUsers */,
 				DAF923EA2DB2734F00949700 /* GitHubUsersTests */,
 				DAF923EE2DB2735400949700 /* GitHubUsersUITests */,
@@ -182,9 +227,10 @@
 		DAF923662DB1203D00949700 /* GitHubUsers */ = {
 			isa = PBXGroup;
 			children = (
+				DA765CAE2DB59C02002E43F1 /* AppSetting */,
 				DA7FDBCF2DB3A27B0025C00E /* CacheManager */,
-				DAF923732DB12D3800949700 /* Models */,
 				DAF923702DB12D3800949700 /* NetworkServices */,
+				DAF923732DB12D3800949700 /* Models */,
 				DAF923722DB12D3800949700 /* Scene */,
 				DAF923D32DB23F3E00949700 /* CustomViews */,
 				DAF923B92DB1544B00949700 /* Extention */,
@@ -198,7 +244,7 @@
 		DAF923702DB12D3800949700 /* NetworkServices */ = {
 			isa = PBXGroup;
 			children = (
-				DA7FDBB52DB37DC50025C00E /* NetworkError.swift */,
+				DA7FDBB52DB37DC50025C00E /* GitHubServiceError.swift */,
 				DA7FDBB72DB37E320025C00E /* NetworkProtocols.swift */,
 				DA7FDBBB2DB381B70025C00E /* GitHubAPIEndpoint.swift */,
 				DA7FDBB92DB37FD20025C00E /* NetworkManager.swift */,
@@ -286,7 +332,12 @@
 		DAF923EA2DB2734F00949700 /* GitHubUsersTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA765CA52DB57674002E43F1 /* MockData */,
 				DAF923E92DB2734F00949700 /* GitHubUsersTests.swift */,
+				DA765C9D2DB5733E002E43F1 /* UserListViewModelTests.swift */,
+				DA765CAA2DB58DAC002E43F1 /* UserDetailViewModelTest.swift */,
+				DA765CAC2DB593DD002E43F1 /* CacheManagerTests.swift */,
+				DA765CB12DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift */,
 			);
 			path = GitHubUsersTests;
 			sourceTree = "<group>";
@@ -463,7 +514,7 @@
 			files = (
 				DA7FDBDA2DB401C30025C00E /* UIImageExtension.swift in Sources */,
 				DA7FDBBA2DB37FD20025C00E /* NetworkManager.swift in Sources */,
-				DA7FDBB62DB37DC50025C00E /* NetworkError.swift in Sources */,
+				DA7FDBB62DB37DC50025C00E /* GitHubServiceError.swift in Sources */,
 				DAF923832DB1323D00949700 /* User.swift in Sources */,
 				DA7FDBBC2DB381B70025C00E /* GitHubAPIEndpoint.swift in Sources */,
 				DAF923672DB1203D00949700 /* UserListView.swift in Sources */,
@@ -471,6 +522,7 @@
 				DAF923B82DB14D2600949700 /* UserItemView.swift in Sources */,
 				DAF923682DB1203D00949700 /* GitHubUsersApp.swift in Sources */,
 				DA7FDBD62DB3CC1C0025C00E /* SwiftDataContainer.swift in Sources */,
+				DA765CB02DB59C1F002E43F1 /* AppSetting.swift in Sources */,
 				DAF923852DB1336400949700 /* UserDetail.swift in Sources */,
 				DAF923D22DB1AAB200949700 /* UserItemModel.swift in Sources */,
 				DA7FDBE22DB4EC9A0025C00E /* ImageLoader.swift in Sources */,
@@ -493,7 +545,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA765CAD2DB593DD002E43F1 /* CacheManagerTests.swift in Sources */,
+				DA765CA72DB57853002E43F1 /* MockUsersModel.swift in Sources */,
 				DAF923EB2DB2734F00949700 /* GitHubUsersTests.swift in Sources */,
+				DA765C9E2DB5733E002E43F1 /* UserListViewModelTests.swift in Sources */,
+				DA765CB82DB5D002002E43F1 /* MockNetworkManager.swift in Sources */,
+				DA765CA22DB57447002E43F1 /* MockCacheManager.swift in Sources */,
+				DA765CA42DB57575002E43F1 /* MockSwiftDataContainer.swift in Sources */,
+				DA765CA02DB5736E002E43F1 /* MockGitHubService.swift in Sources */,
+				DA765CB22DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift in Sources */,
+				DA765CAB2DB58DAC002E43F1 /* UserDetailViewModelTest.swift in Sources */,
+				DA765CA92DB578E6002E43F1 /* MockUserDetailModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,7 +771,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V7W4R2D2VR;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = haonguyen.GitHubUsersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -728,7 +790,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V7W4R2D2VR;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = haonguyen.GitHubUsersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

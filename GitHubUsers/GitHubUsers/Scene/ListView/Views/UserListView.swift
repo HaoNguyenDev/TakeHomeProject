@@ -56,7 +56,7 @@ extension UserListView {
         if (currentUser == viewModel.users.last && viewModel.isLoading == false && !viewModel.users.isEmpty) {
             
             #if DEBUG
-            print(">>> Load more data from user withID\(String(describing: currentUser.id))")
+            print(">>> Load more data from user withID \(String(describing: currentUser.id))")
             #endif
             /* load more if scroll to the last user */
             Task {
