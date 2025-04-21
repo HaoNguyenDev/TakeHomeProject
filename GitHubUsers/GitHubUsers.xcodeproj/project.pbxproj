@@ -18,6 +18,9 @@
 		DA765CB02DB59C1F002E43F1 /* AppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CAF2DB59C1F002E43F1 /* AppSetting.swift */; };
 		DA765CB22DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CB12DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift */; };
 		DA765CB82DB5D002002E43F1 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CB72DB5D002002E43F1 /* MockNetworkManager.swift */; };
+		DA765CBF2DB5EC1B002E43F1 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CBE2DB5EC1B002E43F1 /* NetworkManagerTests.swift */; };
+		DA765CC12DB5EC51002E43F1 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CC02DB5EC51002E43F1 /* MockURLSession.swift */; };
+		DA765CC32DB60EE5002E43F1 /* GitHubAPIEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765CC22DB60EE5002E43F1 /* GitHubAPIEndpointTests.swift */; };
 		DA7FDBB62DB37DC50025C00E /* GitHubServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FDBB52DB37DC50025C00E /* GitHubServiceError.swift */; };
 		DA7FDBB82DB37E320025C00E /* NetworkProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FDBB72DB37E320025C00E /* NetworkProtocols.swift */; };
 		DA7FDBBA2DB37FD20025C00E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FDBB92DB37FD20025C00E /* NetworkManager.swift */; };
@@ -80,6 +83,9 @@
 		DA765CB12DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkServiceTest.swift; sourceTree = "<group>"; };
 		DA765CB72DB5D002002E43F1 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		DA765CBD2DB5D7DE002E43F1 /* GitHubUsers.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GitHubUsers.xctestplan; sourceTree = "<group>"; };
+		DA765CBE2DB5EC1B002E43F1 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		DA765CC02DB5EC51002E43F1 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		DA765CC22DB60EE5002E43F1 /* GitHubAPIEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIEndpointTests.swift; sourceTree = "<group>"; };
 		DA7FDBB52DB37DC50025C00E /* GitHubServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubServiceError.swift; sourceTree = "<group>"; };
 		DA7FDBB72DB37E320025C00E /* NetworkProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocols.swift; sourceTree = "<group>"; };
 		DA7FDBB92DB37FD20025C00E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 				DA765CA62DB57853002E43F1 /* MockUsersModel.swift */,
 				DA765CA82DB578E6002E43F1 /* MockUserDetailModel.swift */,
 				DA765CB72DB5D002002E43F1 /* MockNetworkManager.swift */,
+				DA765CC02DB5EC51002E43F1 /* MockURLSession.swift */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -338,6 +345,8 @@
 				DA765CAA2DB58DAC002E43F1 /* UserDetailViewModelTest.swift */,
 				DA765CAC2DB593DD002E43F1 /* CacheManagerTests.swift */,
 				DA765CB12DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift */,
+				DA765CBE2DB5EC1B002E43F1 /* NetworkManagerTests.swift */,
+				DA765CC22DB60EE5002E43F1 /* GitHubAPIEndpointTests.swift */,
 			);
 			path = GitHubUsersTests;
 			sourceTree = "<group>";
@@ -545,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA765CBF2DB5EC1B002E43F1 /* NetworkManagerTests.swift in Sources */,
 				DA765CAD2DB593DD002E43F1 /* CacheManagerTests.swift in Sources */,
 				DA765CA72DB57853002E43F1 /* MockUsersModel.swift in Sources */,
 				DAF923EB2DB2734F00949700 /* GitHubUsersTests.swift in Sources */,
@@ -554,8 +564,10 @@
 				DA765CA42DB57575002E43F1 /* MockSwiftDataContainer.swift in Sources */,
 				DA765CA02DB5736E002E43F1 /* MockGitHubService.swift in Sources */,
 				DA765CB22DB5CEA9002E43F1 /* GitHubNetworkServiceTest.swift in Sources */,
+				DA765CC32DB60EE5002E43F1 /* GitHubAPIEndpointTests.swift in Sources */,
 				DA765CAB2DB58DAC002E43F1 /* UserDetailViewModelTest.swift in Sources */,
 				DA765CA92DB578E6002E43F1 /* MockUserDetailModel.swift in Sources */,
+				DA765CC12DB5EC51002E43F1 /* MockURLSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

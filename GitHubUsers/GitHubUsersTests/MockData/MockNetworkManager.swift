@@ -8,7 +8,6 @@
 import XCTest
 @testable import GitHubUsers
 
-// MARK: - MockNetworkManager
 class MockNetworkManager: NetworkService {
     var mockResult: Result<Decodable, Error>?
     var capturedEndpoint: Endpoint?

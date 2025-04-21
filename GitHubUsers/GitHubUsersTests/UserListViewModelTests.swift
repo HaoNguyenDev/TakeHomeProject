@@ -17,6 +17,7 @@ final class UserListViewModelTests: XCTestCase {
     var mockSwiftDataContainer: MockSwiftDataContainer!
     var paginationConfig: PaginationConfig!
     var context: ModelContext!
+    
     override func setUp() {
         super.setUp()
         do {
