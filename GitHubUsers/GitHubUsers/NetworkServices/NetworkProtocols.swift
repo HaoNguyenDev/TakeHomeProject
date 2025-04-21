@@ -15,6 +15,7 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
+// MARK: - Endpoint
 protocol Endpoint {
     var baseURL: String { get }
     var path: String { get }
@@ -23,6 +24,7 @@ protocol Endpoint {
     var headers: [String: String]? { get }
 }
 
+// MARK: - NetworkService
 protocol NetworkService {
     func fetchData<T: Decodable>(endpoint: Endpoint, responseType: T.Type) async throws -> T
 }
