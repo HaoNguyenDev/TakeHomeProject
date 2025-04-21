@@ -32,7 +32,7 @@ struct UserItemView: View {
 extension UserItemView {
     private var avatarView: some View {
         Group {
-            /* load image data from cache first*/
+            /* load image data from cache first */
             if let imageData = user.cachedImage, let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -68,7 +68,7 @@ extension UserItemView {
             
             if isDetailView {
                 Text(user.locationName ?? "Location not found".uppercased())
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 12))
             } else {
                 if let urlString = user.githubUrl, let url = URL(string: urlString) {

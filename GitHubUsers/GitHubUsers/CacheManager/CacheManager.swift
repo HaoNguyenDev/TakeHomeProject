@@ -13,15 +13,16 @@ import UIKit
 protocol CacheService {
     associatedtype T: Cacheable
     func saveDataToCache(items: [T]) async throws
-    func fetchDataFromCache() throws -> [T]
-    func clearExpiredDataFromCache() throws
+    func fetchDataFromCache() async throws -> [T]
+    func clearExpiredDataFromCache(forceClear: Bool) async throws
 }
 
 // MARK: - CacheManager
+@MainActor
 class CacheManager<T: Cacheable>: CacheService where T: PersistentModel {
     private let modelType: T.Type
     private let context: ModelContext
-    private let cacheDuration: TimeInterval = 300 // 3 minutes
+    private let cacheDuration: TimeInterval = AppSetting.shared.cacheExpirationTime
     
     init(modelType: T.Type, context: ModelContext) {
         self.modelType = modelType
@@ -48,40 +49,45 @@ class CacheManager<T: Cacheable>: CacheService where T: PersistentModel {
         return try context.fetch(descriptor)
     }
     
-    func clearExpiredDataFromCache() throws {
+    func clearExpiredDataFromCache(forceClear: Bool = false) throws {
         let calendar = Calendar.current
         let expiredDate = calendar.date(byAdding: .second, value: Int(-cacheDuration), to: Date())!
         
-        let predicate = #Predicate<T> { item in
-            item.cachedAt <= expiredDate
+        /* fetch all items */
+        let allDataDescriptor = FetchDescriptor<T>()
+        let allItems = try context.fetch(allDataDescriptor)
+        
+        /* no items in cache to clear */
+        guard !allItems.isEmpty else {
+            return
         }
         
-        let descriptor = FetchDescriptor<T>(predicate: predicate)
-        let expiredItems = try context.fetch(descriptor)
-        #if DEBUG
-        print("Clearing \(expiredItems.count) expired items from cache")
-        #endif
-        
-        /* this handle just clear the data expired only, not clear all of them */
-        //        if !expiredItems.isEmpty {
-        //            for item in expiredItems {
-        //                context.delete(item)
-        //            }
-        //            try context.save()
-        //        }
-        
-        /* more handle to clear all data from cache if one of them expired, then we need fetch new data */
-        if !expiredItems.isEmpty {
-            #if DEBUG
-            print("Found \(expiredItems.count) expired items. About to clear all data from cache.")
-            #endif
-            let allDataDescriptor = FetchDescriptor<T>()
-            let allItems = try context.fetch(allDataDescriptor)
-            for item in allItems {
-                context.delete(item)
+        do {
+            /* clear all data with force clear if need */
+            if forceClear {
+                for item in allItems {
+                    context.delete(item)
+                }
+                try context.save()
+                return
             }
             
-            try context.save()
+            /* check condition and get expired items */
+            let predicate = #Predicate<T> { item in
+                item.cachedAt <= expiredDate
+            }
+            let descriptor = FetchDescriptor<T>(predicate: predicate)
+            let expiredItems = try context.fetch(descriptor)
+            
+            if !expiredItems.isEmpty {
+                for item in expiredItems {
+                    context.delete(item)
+                }
+                try context.save()
+            }
+            
+        } catch {
+            throw error
         }
     }
 }

@@ -1,17 +1,55 @@
 //
-//  NetworkManager.swift
-//  GitHubUsers
+//  MockURLSession.swift
+//  GitHubUsersTests
 //
-//  Created by Hao Nguyen on 19/4/25.
+//  Created by Hao Nguyen on 21/4/25.
 //
 
-import Foundation
+import XCTest
+@testable import GitHubUsers
 
-// MARK: - NetworkManager
-class NetworkManager: NetworkService {
-    private let session: URLSession
+/* Protocol URLSession behavior */
+protocol URLSessionProtocol {
+    func data(for request: URLRequest) async throws -> (Data, URLResponse)
+}
+
+/* Extend URLSession to conform to URLSessionProtocol */
+extension URLSession: URLSessionProtocol {
+    func data(from url: URL) async throws -> (Data, URLResponse) {
+        try await data(from: url, delegate: nil)
+    }
+}
+
+//MARK: - Mock URLSession
+class MockURLSession: URLSessionProtocol { // we can't cannot be inherited directly URLSession
+    var data: Data?
+    var response: URLResponse?
+    var error: Error?
     
-    init(session: URLSession = .shared) {
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        if let error = error {
+            throw GitHubServiceError.networkError(error: error)
+        }
+        guard let response = response else {
+            throw GitHubServiceError.invalidResponse(statusCode: 0)
+        }
+        return (data ?? Data(), response)
+    }
+}
+
+//MARK: - Mock Endpoint
+struct MockEndpoint: Endpoint {
+    var baseURL: String
+    var path: String
+    var method: HTTPMethod
+    var queryParameters: [String: String]?
+    var headers: [String: String]?
+}
+
+class NetworkManagerForTest: NetworkService {
+    private let session: URLSessionProtocol
+    
+    init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
     

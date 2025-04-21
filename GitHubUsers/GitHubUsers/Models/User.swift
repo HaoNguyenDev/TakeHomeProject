@@ -10,7 +10,7 @@ import SwiftData
 
 // MARK: - UserModel
 @Model
-final class User: Codable, Identifiable, Equatable, Cacheable {
+final class User: Decodable, Identifiable, Equatable, Cacheable {
     var id: Int?
     var login: String?
     var avatarUrl: String?
@@ -40,19 +40,30 @@ final class User: Codable, Identifiable, Equatable, Cacheable {
         cachedImage = nil
     }
     
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(login, forKey: .login)
-        try container.encodeIfPresent(avatarUrl, forKey: .avatarUrl)
-        try container.encodeIfPresent(url, forKey: .url)
-    }
-    
     static func == (lhs: User, rhs: User) -> Bool {
         lhs.id == rhs.id
     }
+    
+    //MARK: - Support for testing
+    init (id: Int,
+          login: String,
+          avatarUrl: String,
+          url: String,
+          cachedAt: Date = Date(),
+          imageURL: String,
+          cachedImage: Data? = nil) {
+        self.id = id
+        self.login = login
+        self.avatarUrl = avatarUrl
+        self.url = url
+        self.cachedAt = cachedAt
+        self.imageURL = imageURL
+        self.cachedImage = cachedImage
+    }
 }
 
+
+#if DEBUG
 //MockData
 extension User {
     static var mockUserArray: [User] = {
@@ -127,3 +138,4 @@ extension User {
         return mockUserArray.first!
     }
 }
+#endif

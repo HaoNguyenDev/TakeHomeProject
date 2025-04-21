@@ -15,7 +15,7 @@ protocol Cacheable: PersistentModel {
     var cachedImage: Data? { get set }
 }
 
-protocol ImageCacheable: Cacheable {
-    var imageURL: String? { get set }
-    var cachedImage: Data? { get set }
-}
+//protocol ImageCacheable: Cacheable {
+//    var imageURL: String? { get set }
+//    var cachedImage: Data? { get set }
+//}

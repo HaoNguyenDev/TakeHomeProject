@@ -5,21 +5,25 @@
 //  Created by Hao Nguyen on 19/4/25.
 //
 import SwiftData
-import Foundation
 
 // MARK: - SwiftData Container Setup
 struct SwiftDataContainer {
+    /* ModelContainer manage data for SwiftData */
     let container: ModelContainer
     
     init() throws {
-        let schema = Schema([User.self]) /* we can add more class model to cache data if need */
+        /* we can add more class model to Schema (cache data) if need */
+        let schema = Schema([User.self])
         let configuration = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: false
         )
+        /* if true then data save on ram and reset when close app */
+        
         self.container = try ModelContainer(for: schema, configurations: [configuration])
     }
     
+    /* ModelContext is where operations such as adding, deleting, and editing data are performed.*/
     func createContext() -> ModelContext {
         return ModelContext(container)
     }
