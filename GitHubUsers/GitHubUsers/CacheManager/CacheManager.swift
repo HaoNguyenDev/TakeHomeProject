@@ -18,6 +18,7 @@ protocol CacheService {
 }
 
 // MARK: - CacheManager
+@MainActor
 class CacheManager<T: Cacheable>: CacheService where T: PersistentModel {
     private let modelType: T.Type
     private let context: ModelContext
