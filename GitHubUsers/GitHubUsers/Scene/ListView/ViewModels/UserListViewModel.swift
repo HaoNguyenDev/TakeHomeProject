@@ -36,7 +36,7 @@ class UserListViewModel: ObservableObject, @preconcurrency UserListViewModelProt
     
     init(networkService: GitHubServiceProtocol = GitHubNetworkService(),
          cacheService: CacheManager<User>,
-         paginationConfig: PaginationConfig = PaginationConfig(perPage: 10, since: 0)) {
+         paginationConfig: PaginationConfig = PaginationConfig(perPage: 20, since: 0)) {
         self.networkService = networkService
         self.cacheService = cacheService
         self.paginationConfig = paginationConfig
