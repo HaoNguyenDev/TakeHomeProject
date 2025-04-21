@@ -30,18 +30,24 @@ extension UserDetailViewModel {
     @MainActor
     func fetchUsers(by userName: String) async {
         guard !isLoading else { return }
+        guard let networkService = networkService else {
+            error = NSError(domain: "UserDetailViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "Network service is not available"])
+            return
+        }
+        
         isLoading = true
         error = nil
-        defer { isLoading = false }
+        
         do {
-            usersDetail = try await networkService?.fetchUserDetail(by: userName)
-            isLoading = false
+            let userDetail = try await networkService.fetchUserDetail(by: userName)
+            self.usersDetail = userDetail
         } catch {
             self.error = error
-            isLoading = false
             #if DEBUG
-            print("Failed to fetch users: \(error)")
+            print("Failed to fetch user detail: \(error)")
             #endif
         }
+        
+        isLoading = false
     }
 }

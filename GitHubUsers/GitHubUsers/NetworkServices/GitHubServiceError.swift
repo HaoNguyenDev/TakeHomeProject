@@ -1,5 +1,5 @@
 //
-//  NetworkError.swift
+//  GitHubServiceError.swift
 //  GitHubUsers
 //
 //  Created by Hao Nguyen on 19/4/25.
@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Custom NetworkError
-enum NetworkError: Error {
+enum GitHubServiceError: Error {
     case invalidURL
     case invalidData
     case invalidResponse(statusCode: Int)

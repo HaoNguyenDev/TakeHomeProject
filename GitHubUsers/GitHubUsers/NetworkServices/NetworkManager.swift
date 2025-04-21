@@ -20,18 +20,18 @@ class NetworkManager: NetworkService {
         let (data, response) = try await session.data(for: urlRequest)
         
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.invalidResponse(statusCode: 0)
+            throw GitHubServiceError.invalidResponse(statusCode: 0)
         }
         
         switch httpResponse.statusCode {
         case 200..<300:
             return try decodeData(data, to: responseType)
         case 400..<500:
-            throw NetworkError.clientError(statusCode: httpResponse.statusCode)
+            throw GitHubServiceError.clientError(statusCode: httpResponse.statusCode)
         case 500..<600:
-            throw NetworkError.serverError(statusCode: httpResponse.statusCode)
+            throw GitHubServiceError.serverError(statusCode: httpResponse.statusCode)
         default:
-            throw NetworkError.unknownError(statusCode: httpResponse.statusCode)
+            throw GitHubServiceError.unknownError(statusCode: httpResponse.statusCode)
         }
     }
     
@@ -42,7 +42,7 @@ class NetworkManager: NetworkService {
         }
         
         guard let url = components?.url else {
-            throw NetworkError.invalidURL
+            throw GitHubServiceError.invalidURL
         }
         
         var request = URLRequest(url: url)
@@ -56,7 +56,7 @@ class NetworkManager: NetworkService {
             let decoder = JSONDecoder()
             return try decoder.decode(T.self, from: data)
         } catch {
-            throw NetworkError.decodingError(error: error)
+            throw GitHubServiceError.decodingError(error: error)
         }
     }
 }

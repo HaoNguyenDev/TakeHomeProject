@@ -1,17 +1,19 @@
 //
-//  SwiftDataContainer.swift
-//  GitHubUsers
+//  MockSwiftDataContainer.swift
+//  GitHubUsersTests
 //
-//  Created by Hao Nguyen on 19/4/25.
+//  Created by Hao Nguyen on 21/4/25.
 //
-import SwiftData
 
-// MARK: - SwiftData Container Setup
-struct SwiftDataContainer {
+import Foundation
+import SwiftData
+@testable import GitHubUsers
+
+class MockSwiftDataContainer {
     let container: ModelContainer
     
     init() throws {
-        let schema = Schema([User.self]) /* we can add more class model to cache data if need */
+        let schema = Schema([GitHubUsers.User.self]) /* we can add more class model to cache data if need */
         let configuration = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: false
