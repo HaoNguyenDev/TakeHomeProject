@@ -251,9 +251,9 @@
 		DAF923702DB12D3800949700 /* NetworkServices */ = {
 			isa = PBXGroup;
 			children = (
-				DA7FDBB52DB37DC50025C00E /* GitHubServiceError.swift */,
 				DA7FDBB72DB37E320025C00E /* NetworkProtocols.swift */,
 				DA7FDBBB2DB381B70025C00E /* GitHubAPIEndpoint.swift */,
+				DA7FDBB52DB37DC50025C00E /* GitHubServiceError.swift */,
 				DA7FDBB92DB37FD20025C00E /* NetworkManager.swift */,
 				DA7FDBBF2DB384290025C00E /* GitHubNetworkService */,
 				DA7FDBE32DB4ECBB0025C00E /* LoadImageService */,
