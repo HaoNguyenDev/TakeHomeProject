@@ -62,6 +62,8 @@ final class User: Decodable, Identifiable, Equatable, Cacheable {
     }
 }
 
+
+#if DEBUG
 //MockData
 extension User {
     static var mockUserArray: [User] = {
@@ -136,3 +138,4 @@ extension User {
         return mockUserArray.first!
     }
 }
+#endif

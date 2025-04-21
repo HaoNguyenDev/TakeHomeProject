@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Custom NetworkError
-enum GitHubServiceError: Error {
+enum GitHubServiceError: Error, Equatable {
     case invalidURL
     case invalidData
     case invalidResponse(statusCode: Int)
@@ -35,7 +35,31 @@ enum GitHubServiceError: Error {
         case .networkError(error: let error):
             return "Network Error: \(error.localizedDescription)"
         case .unknownError(let statusCode):
-            return "Unkwown Error Code: \(statusCode)"
+            return "Unknown Error Code: \(statusCode)"
+        }
+    }
+    
+    //MARK: - Conform Equatable protocol to support UnitTest
+    static func == (lhs: GitHubServiceError, rhs: GitHubServiceError) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidURL, .invalidURL):
+            return true
+        case (.invalidData, .invalidData):
+            return true
+        case (.invalidResponse(let statusCode1), .invalidResponse(let statusCode2)):
+            return statusCode1 == statusCode2
+        case (.clientError(let statusCode1), .clientError(let statusCode2)):
+            return statusCode1 == statusCode2
+        case (.serverError(let statusCode1), .serverError(let statusCode2)):
+            return statusCode1 == statusCode2
+        case (.unknownError(let statusCode1), .unknownError(let statusCode2)):
+            return statusCode1 == statusCode2
+        case (.decodingError(let error1), .decodingError(let error2)):
+            return error1.localizedDescription == error2.localizedDescription
+        case (.networkError(let error1), .networkError(let error2)):
+            return error1.localizedDescription == error2.localizedDescription
+        default:
+            return false
         }
     }
 }

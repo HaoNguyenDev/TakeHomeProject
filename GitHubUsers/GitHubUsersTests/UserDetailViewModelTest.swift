@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import GitHubUsers
+
 @MainActor
 final class UserDetailViewModelTests: XCTestCase {
     var sut: UserDetailViewModel!

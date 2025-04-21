@@ -76,6 +76,7 @@ struct UserDetail: Codable {
     }
 }
 
+#if DEBUG
 // MARK: - MockData
 extension UserDetail {
     static var mockUserDetail: UserDetail = {
@@ -109,3 +110,4 @@ extension UserDetail {
         }
     }()
 }
+#endif

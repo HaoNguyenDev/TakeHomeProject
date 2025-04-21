@@ -13,8 +13,8 @@ import UIKit
 protocol CacheService {
     associatedtype T: Cacheable
     func saveDataToCache(items: [T]) async throws
-    func fetchDataFromCache() throws -> [T]
-    func clearExpiredDataFromCache(forceClear: Bool) throws
+    func fetchDataFromCache() async throws -> [T]
+    func clearExpiredDataFromCache(forceClear: Bool) async throws
 }
 
 // MARK: - CacheManager
