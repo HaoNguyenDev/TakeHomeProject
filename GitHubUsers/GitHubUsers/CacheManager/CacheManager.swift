@@ -79,6 +79,7 @@ class CacheManager<T: Cacheable>: CacheService where T: PersistentModel {
             let descriptor = FetchDescriptor<T>(predicate: predicate)
             let expiredItems = try context.fetch(descriptor)
             
+            // Need to discuss more about this logic
             if !expiredItems.isEmpty {
                 for item in expiredItems {
                     context.delete(item)

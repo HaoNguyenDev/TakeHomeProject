@@ -23,9 +23,11 @@ class ImageLoader<T: Cacheable>: ImageLoaderProtocol {
     }
     
     func loadImage(for model: T) async -> Data? {
-        guard let urlString = model.imageURL, let url = URL(string: urlString), model.cachedImage == nil else {
-            return model.cachedImage
+        guard let urlString = model.imageURL,
+              let url = URL(string: urlString) else {
+            return nil
         }
+        
         /* load image from url and resize reduce memory */
         do {
             let (data, _) = try await session.data(from: url)
