@@ -28,10 +28,12 @@ struct UserListView: View {
         }
         .onReceive(viewModel.$error, perform: { error in
             if error != nil {
-                self.showErrorAlert.toggle()
+                showErrorAlert = true
             }
         })
-        .modifier(AlertHandler(showAlert: $showErrorAlert, error: viewModel.error, onDismiss: {}))
+        .modifier(AlertHandler(showAlert: $showErrorAlert, error: viewModel.error, onDismiss: {
+            showErrorAlert = false
+        }))
     }
 }
 
@@ -40,12 +42,10 @@ extension UserListView {
         ScrollView {
             LazyVStack(spacing: 12) {
                 ForEach(viewModel.users, id: \.id) { user in
-                    CustomNavigationLink(title: "User Details", destination: UserDetailsView(userName: user.login)) {
-                        userItemView(user: user)
-                    }
-                    .onAppear {
-                        loadMoreDataIfNeed(currentUser: user)
-                    }
+                    UserItemView(user: userItemModel(from: user), isDetailView: .constant(false))
+                        .onAppear {
+                            loadMoreDataIfNeed(currentUser: user)
+                        }
                 }
             }
             .padding(.top, 10)
@@ -53,32 +53,31 @@ extension UserListView {
     }
     
     func loadMoreDataIfNeed(currentUser: User) {
-        if (currentUser == viewModel.users.last && viewModel.isLoading == false && !viewModel.users.isEmpty) {
-            
+        guard currentUser == viewModel.users.last,
+              !viewModel.isLoading,
+              !viewModel.users.isEmpty else { return }
             #if DEBUG
             print(">>> Load more data from user withID \(String(describing: currentUser.id))")
             #endif
             /* load more if scroll to the last user */
-            Task {
-                await viewModel.loadMoreUser()
-            }
+        Task {
+            await viewModel.loadMoreUser()
         }
     }
 }
 
 // MARK: - CustomView
 extension UserListView {
-    private func userItemView(user: User) -> UserItemView {
-        let user = UserItemModel(id: user.id,
-                                 userName: user.login,
-                                 avatarUrl: user.avatarUrl,
-                                 githubUrl: user.url,
-                                 locationName: "",
-                                 followersCount: "",
-                                 followingCount: "",
-                                 blogUrl: "",
-                                 cachedImage: user.cachedImage)
-        return UserItemView(user: user, isDetailView: .constant(false))
+    private func userItemModel(from user: User) -> UserItemModel {
+        return UserItemModel(id: user.id,
+                             userName: user.login,
+                             avatarUrl: user.avatarUrl,
+                             githubUrl: user.url,
+                             locationName: "",
+                             followersCount: "",
+                             followingCount: "",
+                             blogUrl: "",
+                             cachedImage: user.cachedImage)
     }
     
     private var loadingView: some View {

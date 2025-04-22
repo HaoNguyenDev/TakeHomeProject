@@ -20,7 +20,11 @@ final class User: Decodable, Identifiable, Equatable, Cacheable {
     var cachedAt: Date
     //ImageCacheable
     var imageURL: String?
-    var cachedImage: Data? // add this propertie to cache image loaded
+    // add @Attribute propertie to cache image loaded to the device storage
+    @Attribute(.externalStorage) var cachedImage: Data?
+    // add @Transient if we don't need save to database for other screen
+    @Transient var isFavorite: Bool = false
+   
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
