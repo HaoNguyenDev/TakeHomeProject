@@ -22,11 +22,12 @@ protocol CacheService {
 class CacheManager<T: Cacheable>: CacheService where T: PersistentModel {
     private let modelType: T.Type
     private let context: ModelContext
-    private let cacheDuration: TimeInterval = AppSetting.shared.cacheExpirationTime
+    private var cacheDuration: TimeInterval
     
-    init(modelType: T.Type, context: ModelContext) {
+    init(modelType: T.Type, context: ModelContext, appSetting: AppSettingProtocol) {
         self.modelType = modelType
         self.context = context
+        self.cacheDuration = appSetting.cacheExpirationTime
     }
     
     func saveDataToCache(items: [T]) async throws {

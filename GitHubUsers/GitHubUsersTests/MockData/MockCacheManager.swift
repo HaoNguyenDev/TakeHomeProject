@@ -14,15 +14,15 @@ class MockCacheManager<T: Cacheable>: CacheManager<T> where T: PersistentModel {
     
     var mockCachedUsers: [T] = []
     private let cacheDuration: TimeInterval = 300 // 5 minutes
-    
+    private var appSetting: AppSettingProtocol!
     // MARK: - Initialization
     private let modelType: T.Type
     private let context: ModelContext
     
-    override init(modelType: T.Type, context: ModelContext) {
+    override init(modelType: T.Type, context: ModelContext, appSetting: AppSettingProtocol) {
         self.modelType = modelType
         self.context = context
-        super.init(modelType: modelType, context: context)
+        super.init(modelType: modelType, context: context, appSetting: appSetting)
     }
     
     // MARK: - CacheService Methods

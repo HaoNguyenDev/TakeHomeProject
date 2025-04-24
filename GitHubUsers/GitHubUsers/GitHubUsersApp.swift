@@ -25,7 +25,9 @@ struct GitHubUsersApp: App {
             let context = container.createContext()
             let viewModel = UserListViewModel(
                 networkService: GitHubNetworkService(),
-                cacheService: CacheManager<User>(modelType: User.self, context: context)
+                cacheService: CacheManager<User>(modelType: User.self,
+                                                 context: context,
+                                                 appSetting: AppSetting.shared)
             )
             UserListView(viewModel: viewModel)
         }

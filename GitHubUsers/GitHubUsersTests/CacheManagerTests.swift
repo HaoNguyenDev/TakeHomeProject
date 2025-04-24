@@ -20,7 +20,9 @@ final class CacheManagerTests: XCTestCase {
         do {
             mockContainer = try MockSwiftDataContainer()
             context = mockContainer.createContext()
-            sut = MockCacheManager(modelType: User.self, context: context)
+            sut = MockCacheManager(modelType: User.self,
+                                   context: context,
+                                   appSetting: AppSettingMock())
         } catch {
             XCTFail("Failed to initialize test environment: \(error)")
         }
