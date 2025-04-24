@@ -11,7 +11,7 @@ import SwiftData
 // MARK: - UserModel
 @Model
 final class User: Decodable, Identifiable, Equatable, Cacheable {
-    var id: Int?
+    @Attribute(.unique) var id: Int?
     var login: String?
     var avatarUrl: String?
     var url: String?
