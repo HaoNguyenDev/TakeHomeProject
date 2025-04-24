@@ -27,7 +27,9 @@ final class UserListViewModelTests: XCTestCase {
             
             // Setup mocks
             mockNetworkService = MockGitHubService()
-                        mockCacheManager = MockCacheManager(modelType: User.self, context: context)
+            mockCacheManager = MockCacheManager(modelType: User.self,
+                                                context: context,
+                                                appSetting: AppSettingMock())
                         paginationConfig = PaginationConfig(perPage: 10, since: 0)
             
             // Setup SUT

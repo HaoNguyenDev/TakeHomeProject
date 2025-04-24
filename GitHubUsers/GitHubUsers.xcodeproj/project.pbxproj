@@ -51,6 +51,7 @@
 		DAF923F02DB2735400949700 /* GitHubUsersUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923ED2DB2735400949700 /* GitHubUsersUITestsLaunchTests.swift */; };
 		DAF923F52DB27A0000949700 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923F42DB27A0000949700 /* UserListViewModel.swift */; };
 		DAF923F92DB2A0BA00949700 /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF923F82DB2A0BA00949700 /* UserDetailViewModel.swift */; };
+		DAFCA5532DB965200023E407 /* AppSettingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFCA5522DB965200023E407 /* AppSettingMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		DAF923ED2DB2735400949700 /* GitHubUsersUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUsersUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DAF923F42DB27A0000949700 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		DAF923F82DB2A0BA00949700 /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
+		DAFCA5522DB965200023E407 /* AppSettingMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				DA765CA82DB578E6002E43F1 /* MockUserDetailModel.swift */,
 				DA765CB72DB5D002002E43F1 /* MockNetworkManager.swift */,
 				DA765CC02DB5EC51002E43F1 /* MockURLSession.swift */,
+				DAFCA5522DB965200023E407 /* AppSettingMock.swift */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				DAF923EB2DB2734F00949700 /* GitHubUsersTests.swift in Sources */,
 				DA765C9E2DB5733E002E43F1 /* UserListViewModelTests.swift in Sources */,
 				DA765CB82DB5D002002E43F1 /* MockNetworkManager.swift in Sources */,
+				DAFCA5532DB965200023E407 /* AppSettingMock.swift in Sources */,
 				DA765CA22DB57447002E43F1 /* MockCacheManager.swift in Sources */,
 				DA765CA42DB57575002E43F1 /* MockSwiftDataContainer.swift in Sources */,
 				DA765CA02DB5736E002E43F1 /* MockGitHubService.swift in Sources */,
