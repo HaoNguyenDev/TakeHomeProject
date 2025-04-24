@@ -7,7 +7,11 @@
 
 import Foundation
 
-final class AppSetting {
+protocol AppSettingProtocol {
+    var cacheExpirationTime: TimeInterval { get }
+}
+
+final class AppSetting: AppSettingProtocol {
     static let shared = AppSetting()
     private init() {}
     
